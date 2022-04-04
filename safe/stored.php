@@ -37,8 +37,8 @@
 
         if($stmt = $db->prepare('INSERT INTO users(user_name, comment) VALUES (:user_name, :comment)'))
         {
-            $stmt->bindValue(':user_name',htmlspecialchars($_POST["user_name"]));
-            $stmt->bindValue(':comment',htmlspecialchars($_POST["comment"]));
+            $stmt->bindValue(':user_name',htmlspecialchars($_POST["user_name"],ENT_QUOTES,'UTF-8'));
+            $stmt->bindValue(':comment',htmlspecialchars($_POST["comment"],ENT_QUOTES,'UTF-8'));
             $res = $stmt->execute();
         }
     }
@@ -46,7 +46,7 @@
     $res = $db->query('SELECT * FROM users');
     echo "<br>User | Comment<br>";
     while ($row = $res->fetchArray()) {
-        echo htmlspecialchars("{$row['user_name']} {$row['comment']}");
+        echo htmlspecialchars("{$row['user_name']} {$row['comment']}",ENT_QUOTES,'UTF-8');
         echo "<br>";
     }
 

@@ -32,15 +32,15 @@
     if(isset($_GET['user_name'])){
         $db = new SQLite3('users.db');
 
-        echo "<div><h2>Search result for: ".htmlspecialchars($_GET["user_name"])."</h2></div>";
+        echo "<div><h2>Search result for: ".htmlspecialchars($_GET["user_name"],ENT_QUOTES,'UTF-8')."</h2></div>";
 
         if($stmt = $db->prepare('SELECT * FROM users WHERE user_name LIKE :user_name'))
         {
-            $user_name = SQLite3::escapeString(htmlspecialchars($_GET["user_name"]));
+            $user_name = SQLite3::escapeString(htmlspecialchars($_GET["user_name"],ENT_QUOTES,'UTF-8'));
             $stmt->bindValue(':user_name','%'.$user_name.'%');
             $res = $stmt->execute();
             while ($row = $res->fetchArray()) {
-                echo htmlspecialchars("{$row['user_name']}");
+                echo htmlspecialchars("{$row['user_name']}",ENT_QUOTES,'UTF-8');
                 echo '<br>';
             }
         }
