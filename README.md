@@ -11,4 +11,4 @@ git clone https://github.com/The-F00L/php-xss.git
 cd vulnable
 php -S localhost:8000
 ```
-Your live server will at localhost:8000
+Your live website will be at localhost:8000
